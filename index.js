@@ -24,7 +24,6 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/roles', require('./routes/roles'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/clients', require('./routes/clients'));
-// app.use('/api/events', require('./routes/events'));
 
 // listen requaries
 app.listen(process.env.PORT, () => {
