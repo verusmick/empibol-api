@@ -1,47 +1,21 @@
-var express = require('express');
-var router = express.Router();
-const db = require('../db/db')
+/**
+ Users Routes
+ /api/users
+*/
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-  let query = `SELECT * FROM users`;
-  db.query(query, (err, response) => {
-    if (err) {
-      next(err);
-    } else {
-      res.json({
-        status: "success",
-        message: "Users found",
-        data: [...response]
-      })
-    }
-  })
-});
+const { Router } = require('express');
 
-/* GET users by id */
-router.get('/:uid', function (req, res, next) {
-  let query = `SELECT * FROM users WHERE ci = "${req.params.uid}"`
-  db.query(query, (err, response) => {
-    if (err) {
-      next(err);
-    } else {
-      res.json({
-        status: "success",
-        message: "User found",
-        data: { ...response[0] }
-      })
-    }
-  })
+const { jwtValidator } = require('../middlewares/jwt-validator');
+const users = require('../controllers/users');
+const { createUser, getUsers, updateUser, deleteUser } = require('../controllers/users');
 
-});
+const router = Router();
+router.use(jwtValidator);
 
-/* POST users listing. */
-router.post('/', function (req, res, next) {
-  res.send('respond with a POST');
-});
+router.get('/', getUsers);
+router.post('/', createUser);
+router.put('/:id', updateUser);
+router.delete('/:id', deleteUser);
 
-/* DELETE users listing. */
-router.delete('/:uid', function (req, res, next) {
-  res.send('respond with a DELETE');
-});
+
 module.exports = router;
