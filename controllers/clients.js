@@ -2,6 +2,7 @@ const { response } = require('express');
 const bcrypt = require('bcryptjs');
 
 const Client = require('../models/Client');
+const { findById } = require('../models/Client');
 
 const getClients = async (req, res = response) => {
     try {
@@ -11,6 +12,29 @@ const getClients = async (req, res = response) => {
             clients
         })
 
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Porfavor contacte con el Administrador'
+        });
+    }
+}
+
+const getClientById = async (req, res = response) => {
+    try {
+        const clientId = req.params.id;
+        const client = await Client.findById(clientId)
+        if (!client) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'El Cliente no existe'
+            })
+        }
+        res.json({
+            ok: true,
+            client
+        })
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -88,13 +112,11 @@ const deleteClient = async (req, res = response) => {
             msg: 'Porfavor contacte con el Administrador'
         });
     }
-
 }
-
-
 
 module.exports = {
     getClients,
+    getClientById,
     createClient,
     updateClient,
     deleteClient
