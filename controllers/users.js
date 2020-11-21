@@ -20,6 +20,28 @@ const getUsers = async (req, res = response) => {
     }
 }
 
+const getUserById = async (req, res = response) => {
+    try {
+        const userId = req.params.id
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'El Usuario no existe'
+            })
+        }
+        res.json({
+            ok: true,
+            user
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Porfavor contacte con el Administrador'
+        });
+    }
+}
 
 const createUser = async (req, res = response) => {
     const { ci, password } = req.body;
@@ -113,6 +135,7 @@ const deleteUser = async (req, res = response) => {
 
 module.exports = {
     getUsers,
+    getUserById,
     createUser,
     updateUser,
     deleteUser
