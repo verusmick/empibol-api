@@ -3,14 +3,34 @@ const bcrypt = require('bcryptjs');
 
 const { generateJWT } = require('../utils/jwt');
 const User = require('../models/User');
+const Role = require('../models/Role');
+
 
 const getUsers = async (req, res = response) => {
+    const { role: roleName } = req.query;    
     try {
-        const users = await User.find().populate('role');
-        res.json({
-            ok: true,
-            users
-        })
+        if (roleName) {
+            const role = await Role.findOne({ name: roleName })            
+            if (!role) {
+
+                return res.status(404).json({
+                    ok: false,
+                    msg: 'El Rol enviado en los parametros no Existe'
+                })
+            } else {
+                const users = await User.find({ role: { '_id': role._id } }).populate('role')
+                res.json({
+                    ok: true,
+                    users
+                })
+            }
+        } else {
+            const users = await User.find().populate('role');
+            res.json({
+                ok: true,
+                users
+            })
+        }
     } catch (error) {
         console.log(error);
         res.status(500).json({
