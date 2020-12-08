@@ -25,9 +25,9 @@ app.use('/api/roles', require('./routes/roles'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/clients', require('./routes/clients'));
 
-
 app.use('/api/image', require('./routes/image'));
-app.use('/api/checkIn', require('./routes/chekIn'));
+app.use('/api/checkIn', require('./routes/checkIn'));
+app.use('/api/checkOut', require('./routes/checkOut'));
 
 // listen requaries
 app.listen(process.env.PORT, () => {

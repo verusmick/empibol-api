@@ -4,7 +4,6 @@
 */
 
 const { Router } = require('express');
-const multipart = require('connect-multiparty');
 
 const { createCheckIn } = require('../controllers/checkIn');
 
