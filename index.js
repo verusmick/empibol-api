@@ -25,6 +25,10 @@ app.use('/api/roles', require('./routes/roles'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/clients', require('./routes/clients'));
 
+
+app.use('/api/image', require('./routes/image'));
+app.use('/api/checkIn', require('./routes/chekIn'));
+
 // listen requaries
 app.listen(process.env.PORT, () => {
     console.log(`Server running in port ${process.env.PORT}`);
