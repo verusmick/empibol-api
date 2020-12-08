@@ -29,6 +29,8 @@ app.use('/api/image', require('./routes/image'));
 app.use('/api/checkIn', require('./routes/checkIn'));
 app.use('/api/checkOut', require('./routes/checkOut'));
 
+app.use('/api/report', require('./routes/reports'));
+
 // listen requaries
 app.listen(process.env.PORT, () => {
     console.log(`Server running in port ${process.env.PORT}`);

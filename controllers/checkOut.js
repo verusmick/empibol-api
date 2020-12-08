@@ -1,14 +1,15 @@
 const { response, json } = require('express');
-const CheckOut = require('../models/CheckOut');
+const CheckInOut = require('../models/CheckInOut');
 
 const createCheckOut = async (req, res = response) => {
 
     let body = req.body;
     body = {
         ...body,
-        date: new Date()
+        date: new Date(),
+        type: 'checkOut'
     }
-    const checkOut = new CheckOut(body);
+    const checkOut = new CheckInOut(body);
     try {
         const checkOutSaved = await checkOut.save();
         res.status(201).json({

@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const CheckOutSchema = Schema({
+const CheckInOutSchema = Schema({
     date: {
         type: Date,
         required: true
@@ -11,6 +11,10 @@ const CheckOutSchema = Schema({
         required: true
     },
     imgName: {
+        type: String,
+        required: true
+    },
+    type: {
         type: String,
         required: true
     },
@@ -26,4 +30,4 @@ const CheckOutSchema = Schema({
     }
 });
 
-module.exports = model('CheckOut', CheckOutSchema);
+module.exports = model('CheckInOut', CheckInOutSchema);
