@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.static('public'));
 
 // public path to media
-app.use('/src', express.static(__dirname+'/images'));
+app.use('/api/src', express.static(__dirname+'/images'));
 
 //read and body parse
 app.use(express.json());
