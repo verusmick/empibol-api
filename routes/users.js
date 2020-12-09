@@ -10,13 +10,13 @@ const users = require('../controllers/users');
 const { createUser, getUsers, updateUser, deleteUser, getUserById } = require('../controllers/users');
 
 const router = Router();
-router.use(jwtValidator);
+// router.use(jwtValidator);
 
-router.get('/', getUsers);
-router.get('/:id', getUserById);
+router.get('/', [jwtValidator], getUsers);
+router.get('/:id', [jwtValidator], getUserById);
 router.post('/', createUser);
-router.put('/:id', updateUser);
-router.delete('/:id', deleteUser);
+router.put('/:id', [jwtValidator], updateUser);
+router.delete('/:id', [jwtValidator], deleteUser);
 
 
 module.exports = router;
